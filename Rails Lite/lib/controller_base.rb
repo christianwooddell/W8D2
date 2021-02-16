@@ -22,6 +22,12 @@ class ControllerBase
   # Set the response's content type to the given type.
   # Raise an error if the developer tries to double render.
   def render_content(content, content_type)
+    prepare_render_or_redirect
+
+    @res.write(content)
+    @res['Content-Type'] = content_type
+
+    nil
   end
 
   # use ERB and binding to evaluate templates
